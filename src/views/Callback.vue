@@ -142,7 +142,7 @@ export default {
       });
 
       try {
-        const apiEndpoint = "http://localhost:3000/submit"; // Replace with your API URL
+        const apiEndpoint = import.meta.env.VITE_API + "/submit"; // Replace with your API URL
         const response = await fetch(apiEndpoint, {
           method: "POST",
           headers: {
