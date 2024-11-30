@@ -211,10 +211,12 @@ export default {
 
           setTimeout(() => {
             // window.location.href = "https://vbacvetthailand.com/thankyoupage";
-            window.open("https://vbacvetthailand.com/thankyoupage");
+            window.open(
+              `https://vbacvetthailand.com/thankyoupage/?phone=${this.form.phone}&course=${this.param}&lineID=${this.lineUserId}`
+            );
           }, 0);
 
-          // window.close(); // Close the current page
+          window.close(); // Close the current page
 
           // open thankyou page
           //https://vbacvetthailand.com/thankyoupage/
