@@ -174,6 +174,7 @@ export default {
     },
     resetForm() {
       // รีเซ็ตค่าฟอร์ม
+      this.form.date = "";
       this.form.name = "";
       this.form.phone = "";
       this.form.email = "";
