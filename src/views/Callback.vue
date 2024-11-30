@@ -184,15 +184,15 @@ export default {
         return; // หยุดการทำงานของฟังก์ชัน
       }
 
-      if (
-        this.form.date ||
-        this.form.name ||
-        this.form.phone ||
-        this.form.email === ""
-      ) {
-        alert("กรุณากรอกข้อมูลให้ครบ");
-        return; // หยุดการทำงานของฟังก์ชัน
-      }
+      // if (
+      //   this.form.date ||
+      //   this.form.name ||
+      //   this.form.phone ||
+      //   this.form.email === ""
+      // ) {
+      //   alert("กรุณากรอกข้อมูลให้ครบ");
+      //   return; // หยุดการทำงานของฟังก์ชัน
+      // }
 
       try {
         const apiEndpoint = import.meta.env.VITE_API + "/submit"; // Replace with your API URL
