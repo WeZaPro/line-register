@@ -1,7 +1,7 @@
 <template>
   <div class="registration-container">
     <div class="form-container">
-      <h1 class="form-title">ลงทะเบียน</h1>
+      <h1>ลงทะเบียน</h1>
       <form @submit.prevent="submitForm">
         <div class="form-group">
           <label for="course" class="highlight-label">
@@ -212,92 +212,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.registration-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f4f7fa;
-}
-
-.form-container {
-  width: 80%;
-  max-width: 600px;
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.form-title {
-  text-align: center;
-  color: #3c4a60;
-  font-size: 28px;
-  margin-bottom: 20px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-label {
-  display: block;
-  font-size: 16px;
-  color: #6c757d;
-  margin-bottom: 8px;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="date"],
-input[type="file"] {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ced4da;
-  border-radius: 8px;
-  box-sizing: border-box;
-}
-
-input[type="file"] {
-  padding: 5px;
-}
-
-button {
-  width: 100%;
-  padding: 12px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
-
-button:focus {
-  outline: none;
-}
-
-.highlight-label {
-  color: #007bff;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-input:focus,
-button:focus {
-  border-color: #007bff;
-  outline: none;
-}
-</style>
