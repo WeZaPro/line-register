@@ -175,9 +175,18 @@ export default {
 
         console.log("send form data >>>>> ", formData);
 
+        const test_data = {
+          date: "24-11-30",
+          name: "Taweesak",
+          phone: "0988888888",
+          email: "wee@mail.com",
+          displayName: "wee",
+          param: "param1",
+        };
+
         const response = await fetch(apiEndpoint, {
           method: "POST",
-          body: formData, // Send the FormData object instead of JSON
+          body: test_data, // Send the FormData object instead of JSON
         });
 
         const result = await response.json();
