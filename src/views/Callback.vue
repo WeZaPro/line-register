@@ -196,7 +196,8 @@ export default {
           //   `https://vbacvetthailand.com/thankyoupage/?phone=${this.form.phone}&course=${this.param}`,
           //   "_self"
           // ); // Open thank you page in the same tab
-          window.open("https://vbacvetthailand.com/thankyoupage");
+          // window.open("https://vbacvetthailand.com/thankyoupage");
+          window.location.href = "https://vbacvetthailand.com/thankyoupage";
           window.close(); // Close the current page
 
           // open thankyou page
