@@ -166,9 +166,31 @@ export default {
       const inputDate = new Date(this.form.date); // แปลงวันที่จาก input
       const currentDate = new Date(); // วันที่ปัจจุบัน
       currentDate.setHours(0, 0, 0, 0); // ตั้งเวลาเป็น 00:00:00 เพื่อเปรียบเทียบเฉพาะวันที่
+      inputDate.setHours(0, 0, 0, 0); // ตั้งเวลาเป็น 00:00:00 เช่นกัน
 
-      if (inputDate <= currentDate + 1) {
+      if (inputDate <= currentDate) {
         alert("กรุณาเลือกวันที่มากกว่าวันที่ปัจจุบัน");
+        return; // หยุดการทำงานของฟังก์ชัน
+      }
+
+      if (inputDate <= currentDate) {
+        alert("กรุณาเลือกวันที่มากกว่าวันที่ปัจจุบัน");
+        return; // หยุดการทำงานของฟังก์ชัน
+      }
+
+      // ตรวจสอบไฟล์
+      if (!this.file || this.file.size === 0) {
+        alert("กรุณาอัพโหลดไฟล์ก่อนส่งฟอร์ม");
+        return; // หยุดการทำงานของฟังก์ชัน
+      }
+
+      if (
+        this.form.date ||
+        this.form.name ||
+        this.form.phone ||
+        this.form.email === ""
+      ) {
+        alert("กรุณากรอกข้อมูลให้ครบ");
         return; // หยุดการทำงานของฟังก์ชัน
       }
 
@@ -212,7 +234,7 @@ export default {
           setTimeout(() => {
             // window.location.href = "https://vbacvetthailand.com/thankyoupage";
             window.open(
-              `https://vbacvetthailand.com/thankyoupage/?phone=${this.form.phone}&course=${this.param}&lineID=${this.lineUserId}`
+              `https://vbacvetthailand.com/thankyoupage/?phone=${formData.phone}&course=${formData.param}&lineID=${this.lineUserId}`
             );
           }, 0);
 
