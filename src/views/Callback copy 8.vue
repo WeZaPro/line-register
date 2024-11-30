@@ -191,12 +191,6 @@ export default {
           alert("File uploaded successfully!"); // แจ้งเตือนสำเร็จ
 
           this.resetForm(); // รีเซ็ตฟอร์ม
-          // เปิดหน้าเว็บใหม่และปิดหน้าเว็บปัจจุบัน
-          window.open(
-            `https://vbacvetthailand.com/thankyoupage/?phone=${this.form.phone}&course=${this.param}`,
-            "_self"
-          ); // Open thank you page in the same tab
-          window.close(); // Close the current page
 
           // open thankyou page
           //https://vbacvetthailand.com/thankyoupage/
