@@ -173,20 +173,9 @@ export default {
           formData.append("file", this.file); // Append the file to FormData
         }
 
-        console.log("send form data >>>>> ", formData);
-
-        const test_data = {
-          date: "24-11-30",
-          name: "Taweesak",
-          phone: "0988888888",
-          email: "wee@mail.com",
-          displayName: "wee",
-          param: "param1",
-        };
-
         const response = await fetch(apiEndpoint, {
           method: "POST",
-          body: test_data, // Send the FormData object instead of JSON
+          body: formData, // Send the FormData object instead of JSON
         });
 
         const result = await response.json();
@@ -223,70 +212,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* กำหนดให้คอนเทนเนอร์ของฟอร์มอยู่กลางหน้าจอ */
-.registration-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f5f5f5;
-  margin: 0;
-}
-
-/* กำหนดรูปแบบของฟอร์ม */
-.form-container {
-  width: 50%;
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  text-align: center;
-}
-
-/* รูปแบบของหัวข้อ */
-h1 {
-  margin-bottom: 20px;
-  color: #333333;
-}
-
-/* รูปแบบของกลุ่มฟอร์ม */
-.form-group {
-  margin-bottom: 15px;
-  text-align: left;
-}
-
-/* รูปแบบของป้ายชื่อ */
-label {
-  font-weight: bold;
-  margin-bottom: 5px;
-  display: block;
-}
-
-/* รูปแบบของช่องกรอกข้อมูล */
-input {
-  width: 100%;
-  padding: 10px;
-  margin: 5px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
-}
-
-/* รูปแบบของปุ่ม */
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-</style>
