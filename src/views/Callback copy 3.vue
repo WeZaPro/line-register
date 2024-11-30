@@ -161,29 +161,9 @@ export default {
         const result = await response.json();
         console.log("Form submitted successfully:", result);
         alert("ลงทะเบียนสำเร็จ!");
-        // เมื่อ res OK
-        if (response.status === 200) {
-          alert("File uploaded successfully!"); // แจ้งเตือนสำเร็จ
-
-          this.resetForm(); // รีเซ็ตฟอร์ม
-        }
       } catch (error) {
         console.error("Error submitting form:", error);
         alert("เกิดข้อผิดพลาดในการลงทะเบียน กรุณาลองอีกครั้ง");
-      }
-    },
-    resetForm() {
-      // รีเซ็ตค่าฟอร์ม
-      this.form.name = "";
-      this.form.phone = "";
-      this.form.email = "";
-      this.displayName = "";
-      this.param = "";
-
-      // รีเซ็ต input file (เพราะ v-model ใช้ไม่ได้กับ type file)
-      const fileInput = document.querySelector('input[type="file"]');
-      if (fileInput) {
-        fileInput.value = null;
       }
     },
   },
