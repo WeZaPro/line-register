@@ -71,6 +71,7 @@ export default {
     return {
       param: "", // Param to hold course data
       displayName: "", // Line display name
+      lineUserId: "", // Line lineUserId
       form: {
         name: "",
         date: "", // Initialize date field
@@ -124,6 +125,7 @@ export default {
         if (data.access_token) {
           const userProfile = await this.getUserProfile(data.access_token);
           console.log("userProfil >> ", userProfile);
+          this.lineUserId = userProfile.userId || "ไม่ทราบuserId";
           this.displayName = userProfile.displayName || "ไม่ทราบชื่อผู้ใช้";
         } else {
           console.error("Error getting access token:", data);
@@ -155,6 +157,7 @@ export default {
         phone: this.form.phone,
         email: this.form.email,
         displayName: this.displayName,
+        lineUserId: this.lineUserId,
         param: this.param,
         file: this.file, // Add the file to the data being sent
       });
@@ -169,6 +172,7 @@ export default {
         formData.append("phone", this.form.phone);
         formData.append("email", this.form.email);
         formData.append("displayName", this.displayName);
+        formData.append("lineUserId", this.lineUserId);
         formData.append("param", this.param);
         if (this.file) {
           formData.append("file", this.file); // Append the file to FormData
@@ -201,6 +205,7 @@ export default {
       this.form.phone = "";
       this.form.email = "";
       this.displayName = "";
+      // this.lineUserId = "";
       this.param = "";
       this.file = null; // Reset the file field
 
