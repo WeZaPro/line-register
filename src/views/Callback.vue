@@ -16,7 +16,7 @@
         </div>
 
         <div class="form-group">
-          <label for="date">วันที่:</label>
+          <label for="date">วันที่ลงคอร์ส:</label>
           <input type="date" id="date" v-model="form.date" required />
         </div>
         <div class="form-group">
@@ -234,7 +234,7 @@ export default {
           setTimeout(() => {
             // window.location.href = "https://vbacvetthailand.com/thankyoupage";
             window.open(
-              `https://vbacvetthailand.com/thankyoupage/?phone=${formData.phone}&course=${formData.param}&lineID=${this.lineUserId}`
+              `https://vbacvetthailand.com/thankyoupage/?phone=${result.phone}&course=${formData.param}&lineID=${this.lineUserId}`
             );
           }, 0);
 
