@@ -162,16 +162,6 @@ export default {
         file: this.file, // Add the file to the data being sent
       });
 
-      // ตรวจสอบวันที่
-      const inputDate = new Date(this.form.date); // แปลงวันที่จาก input
-      const currentDate = new Date(); // วันที่ปัจจุบัน
-      currentDate.setHours(0, 0, 0, 0); // ตั้งเวลาเป็น 00:00:00 เพื่อเปรียบเทียบเฉพาะวันที่
-
-      if (inputDate <= currentDate) {
-        alert("กรุณาเลือกวันที่มากกว่าวันที่ปัจจุบัน");
-        return; // หยุดการทำงานของฟังก์ชัน
-      }
-
       try {
         const apiEndpoint = import.meta.env.VITE_API + "/submit"; // Replace with your API URL
 
