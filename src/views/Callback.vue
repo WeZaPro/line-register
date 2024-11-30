@@ -234,7 +234,7 @@ export default {
           setTimeout(() => {
             // window.location.href = "https://vbacvetthailand.com/thankyoupage";
             window.open(
-              `https://vbacvetthailand.com/thankyoupage/?phone=${result}&course=${formData.param}&lineID=${this.lineUserId}`
+              `https://vbacvetthailand.com/thankyoupage/?phone=${dataCustomer.phone}&course=${dataCustomer.param}&lineID=${this.lineUserId}`
             );
           }, 0);
 
