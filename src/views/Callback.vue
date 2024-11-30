@@ -173,6 +173,8 @@ export default {
           formData.append("file", this.file); // Append the file to FormData
         }
 
+        console.log("send form data >>>>> ", formData);
+
         const response = await fetch(apiEndpoint, {
           method: "POST",
           body: formData, // Send the FormData object instead of JSON
