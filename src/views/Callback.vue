@@ -197,7 +197,12 @@ export default {
           //   "_self"
           // ); // Open thank you page in the same tab
           // window.open("https://vbacvetthailand.com/thankyoupage");
-          window.location.href = "https://vbacvetthailand.com/thankyoupage";
+          // window.location.href = "https://vbacvetthailand.com/thankyoupage";
+
+          setTimeout(() => {
+            window.location.href = `https://vbacvetthailand.com/thankyoupage/?phone=${this.form.phone}&course=${this.param}&lineid=${this.lineUserId}`;
+          }, 0);
+
           window.close(); // Close the current page
 
           // open thankyou page
