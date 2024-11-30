@@ -190,7 +190,7 @@ export default {
         if (response.status === 200) {
           alert("ลงทะเบียนสำเร็จ!"); // แจ้งเตือนสำเร็จ
 
-          // this.resetForm(); // รีเซ็ตฟอร์ม
+          this.resetForm(); // รีเซ็ตฟอร์ม
           // เปิดหน้าเว็บใหม่และปิดหน้าเว็บปัจจุบัน
           // window.open(
           //   `https://vbacvetthailand.com/thankyoupage/?phone=${this.form.phone}&course=${this.param}`,
@@ -204,7 +204,7 @@ export default {
             window.open("https://vbacvetthailand.com/thankyoupage");
           }, 0);
 
-          window.close(); // Close the current page
+          // window.close(); // Close the current page
 
           // open thankyou page
           //https://vbacvetthailand.com/thankyoupage/
