@@ -1,6 +1,11 @@
 <template>
   <div class="registration-container">
     <div class="form-container">
+      <!-- <h1>Callback Page</h1>
+      <p>Param: {{ param }}</p>
+      <p>Display Name: {{ displayName }}</p>
+      <p>Getting your Line User ID...</p> -->
+
       <h1>ลงทะเบียน</h1>
       <form @submit.prevent="submitForm">
         <div class="form-group">
@@ -11,23 +16,13 @@
 
         <div class="form-group">
           <label for="displayName" class="highlight-label">
-            <strong>line display name:</strong> {{ displayName }}
+            <strong>ชื่อผู้ใช้:</strong> {{ displayName }}
           </label>
         </div>
 
         <div class="form-group">
           <label for="date">วันที่:</label>
           <input type="date" id="date" v-model="form.date" required />
-        </div>
-        <div class="form-group">
-          <label for="name">ชือ-นามสกุล:</label>
-          <input
-            type="text"
-            id="name"
-            v-model="form.name"
-            placeholder="ใส่ชื่อ-นามสกุล"
-            required
-          />
         </div>
         <div class="form-group">
           <label for="phone">เบอร์โทรศัพท์:</label>
@@ -65,7 +60,7 @@ export default {
       param: "",
       displayName: "",
       form: {
-        name: "",
+        course: "",
         date: "",
         phone: "",
         email: "",
@@ -73,19 +68,39 @@ export default {
     };
   },
   created() {
-    // Get param from cookies
-    this.param = Cookies.get("param") || "ไม่มีข้อมูลคอร์ส";
-    console.log("Param from cookies:", this.param);
+    console.log(
+      "VITE_CALLBACK_URL CALLBACK",
+      import.meta.env.VITE_CALLBACK_URL
+    );
+
+    this.param = Cookies.get("param");
+    console.log("cookies param in callback ", this.param); // Output: John Doe
 
     // Get 'code' and 'state' from URL
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
+    const state = urlParams.get("state");
+
     if (code) {
+      console.log("Code:", code);
+      console.log("State:", state);
       this.getLineUserId(code, this.param);
+    } else {
+      console.error("No code found in URL");
     }
   },
   methods: {
-    async getLineUserId(code, param) {
+    async getLineUserId(code, _param) {
+      console.log("_param ", _param);
+      let param_register = "";
+      if (_param === "undefined") {
+        param_register = "not_register";
+        console.log("No Register ==> ");
+      } else {
+        param_register = _param;
+        console.log("Register ==> ");
+      }
+      console.log("รับค่าจาก form register บน web ", param_register);
       try {
         const redirectUri = import.meta.env.VITE_CALLBACK_URL + "/callback";
         const clientId = import.meta.env.VITE_CLIENT_ID;
@@ -100,14 +115,21 @@ export default {
 
         const response = await fetch("https://api.line.me/oauth2/v2.1/token", {
           method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
           body: params,
         });
 
         const data = await response.json();
+
         if (data.access_token) {
+          console.log("Access Token:", data.access_token);
+
           const userProfile = await this.getUserProfile(data.access_token);
-          this.displayName = userProfile.displayName || "ไม่ทราบชื่อผู้ใช้";
+          console.log("Line User Profile:", userProfile);
+
+          this.displayName = userProfile.displayName; // Update displayName
         } else {
           console.error("Error getting access token:", data);
         }
@@ -120,10 +142,14 @@ export default {
       try {
         const response = await fetch("https://api.line.me/v2/profile", {
           method: "GET",
-          headers: { Authorization: `Bearer ${accessToken}` },
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
         });
 
         const data = await response.json();
+        console.log("User Profile:", data);
+
         return data;
       } catch (error) {
         console.error("Error fetching user profile:", error);
@@ -131,18 +157,8 @@ export default {
     },
 
     async submitForm() {
-      console.log("Submitting form...");
-      console.log("Data to be sent:", {
-        date: this.form.date,
-        name: this.form.name,
-        phone: this.form.phone,
-        email: this.form.email,
-        displayName: this.displayName,
-        param: this.param,
-      });
-
       try {
-        const apiEndpoint = "http://localhost:3000/submit"; // Replace with your API URL
+        const apiEndpoint = "https://your-api-endpoint.com/submit"; // Replace with your API endpoint
         const response = await fetch(apiEndpoint, {
           method: "POST",
           headers: {
@@ -150,7 +166,6 @@ export default {
           },
           body: JSON.stringify({
             date: this.form.date,
-            name: this.form.name,
             phone: this.form.phone,
             email: this.form.email,
             displayName: this.displayName,
@@ -160,10 +175,10 @@ export default {
 
         const result = await response.json();
         console.log("Form submitted successfully:", result);
-        alert("ลงทะเบียนสำเร็จ!");
+        alert("Form submitted successfully!");
       } catch (error) {
         console.error("Error submitting form:", error);
-        alert("เกิดข้อผิดพลาดในการลงทะเบียน กรุณาลองอีกครั้ง");
+        alert("Error submitting form. Please try again.");
       }
     },
   },
