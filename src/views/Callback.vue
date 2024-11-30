@@ -185,12 +185,12 @@ export default {
 
         const result = await response.json();
         console.log("Form submitted successfully:", result);
-        alert("ลงทะเบียนสำเร็จ!");
+        // alert("ลงทะเบียนสำเร็จ!");
 
         if (response.status === 200) {
-          alert("File uploaded successfully!"); // แจ้งเตือนสำเร็จ
+          alert("ลงทะเบียนสำเร็จ!"); // แจ้งเตือนสำเร็จ
 
-          this.resetForm(); // รีเซ็ตฟอร์ม
+          // this.resetForm(); // รีเซ็ตฟอร์ม
           // เปิดหน้าเว็บใหม่และปิดหน้าเว็บปัจจุบัน
           // window.open(
           //   `https://vbacvetthailand.com/thankyoupage/?phone=${this.form.phone}&course=${this.param}`,
@@ -200,7 +200,8 @@ export default {
           // window.location.href = "https://vbacvetthailand.com/thankyoupage";
 
           setTimeout(() => {
-            window.location.href = `https://vbacvetthailand.com/thankyoupage/?phone=${this.form.phone}&course=${this.param}&lineid=${this.lineUserId}`;
+            // window.location.href = "https://vbacvetthailand.com/thankyoupage";
+            window.open("https://vbacvetthailand.com/thankyoupage");
           }, 0);
 
           window.close(); // Close the current page
