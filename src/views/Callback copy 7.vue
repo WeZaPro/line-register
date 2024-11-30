@@ -123,7 +123,6 @@ export default {
         const data = await response.json();
         if (data.access_token) {
           const userProfile = await this.getUserProfile(data.access_token);
-          console.log("userProfil >> ", userProfile);
           this.displayName = userProfile.displayName || "ไม่ทราบชื่อผู้ใช้";
         } else {
           console.error("Error getting access token:", data);
