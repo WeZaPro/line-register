@@ -269,7 +269,7 @@ export default {
             // window.location.href = "https://vbacvetthailand.com/thankyoupage";
             window.open(
               // `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}`
-              `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}&phone=${result.dataCustomer.phone}&email=${result.dataCustomer.email}`
+              `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}&phone=${result.dataCustomer.phone}&email=${result.dataCustomer.email}&course=${result.dataCustomer.param}`
             );
           }, 0);
           console.log("result ", result.dataCustomer.phone);
