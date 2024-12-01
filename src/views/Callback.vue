@@ -15,6 +15,10 @@
           </label>
         </div>
 
+        <!-- loading -->
+        <div v-if="loading" class="loader"></div>
+        <!-- loading -->
+
         <div class="form-group">
           <label for="date">วันที่ลงคอร์ส:</label>
           <input type="date" id="date" v-model="form.date" required />
@@ -69,6 +73,7 @@ export default {
   name: "callback",
   data() {
     return {
+      loading: false,
       param: "", // Param to hold course data
       displayName: "", // Line display name
       lineUserId: "", // Line lineUserId
@@ -209,6 +214,9 @@ export default {
         if (this.file) {
           formData.append("file", this.file); // Append the file to FormData
         }
+        //Loading start
+        this.loading = true;
+        console.log("this.loading start submit ", this.loading);
 
         const response = await fetch(apiEndpoint, {
           method: "POST",
@@ -220,6 +228,9 @@ export default {
         // alert("ลงทะเบียนสำเร็จ!");
 
         if (response.status === 200) {
+          //Loading End
+          this.loading = false;
+          console.log("this.loading response ok ", this.loading);
           alert("ลงทะเบียนสำเร็จ!"); // แจ้งเตือนสำเร็จ
 
           this.resetForm(); // รีเซ็ตฟอร์ม
@@ -356,5 +367,24 @@ input:focus,
 button:focus {
   border-color: #007bff;
   outline: none;
+}
+
+.loader {
+  border: 8px solid #f3f3f3; /* Light grey */
+  border-top: 8px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+  margin: auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>
