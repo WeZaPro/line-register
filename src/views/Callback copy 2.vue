@@ -1,12 +1,5 @@
 <template>
   <div class="registration-container">
-    <!-- ส่วนของ Alert -->
-    <AlertComponent
-      v-if="alert.show"
-      :message="alert.message"
-      :type="alert.type"
-    />
-
     <div class="form-container">
       <h1 class="form-title">ลงทะเบียน</h1>
       <form @submit.prevent="submitForm">
@@ -75,21 +68,12 @@
 
 <script>
 import Cookies from "js-cookie";
-import AlertComponent from "../components/AlertComponent.vue";
 
 export default {
   name: "callback",
-  components: {
-    AlertComponent,
-  },
   data() {
     return {
       loading: false,
-      alert: {
-        show: false,
-        message: "",
-        type: "success", // หรือ "error", "warning"
-      },
       param: "", // Param to hold course data
       displayName: "", // Line display name
       lineUserId: "", // Line lineUserId
@@ -246,15 +230,8 @@ export default {
         if (response.status === 200) {
           //Loading End
           this.loading = false;
-
-          this.alert = {
-            show: true,
-            message: "ลงทะเบียนสำเร็จ!",
-            type: "success",
-          };
-
-          // console.log("this.loading response ok ", this.loading);
-          // alert("ลงทะเบียนสำเร็จ!"); // แจ้งเตือนสำเร็จ
+          console.log("this.loading response ok ", this.loading);
+          alert("ลงทะเบียนสำเร็จ!"); // แจ้งเตือนสำเร็จ
 
           this.resetForm(); // รีเซ็ตฟอร์ม
           // เปิดหน้าเว็บใหม่และปิดหน้าเว็บปัจจุบัน
@@ -268,11 +245,9 @@ export default {
           setTimeout(() => {
             // window.location.href = "https://vbacvetthailand.com/thankyoupage";
             window.open(
-              // `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}`
-              `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}&phone=${result.dataCustomer.phone}&email=${result.dataCustomer.email}`
+              `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}`
             );
           }, 0);
-          console.log("result ", result.dataCustomer.phone);
 
           window.close(); // Close the current page
 
@@ -280,13 +255,8 @@ export default {
           //https://vbacvetthailand.com/thankyoupage/
         }
       } catch (error) {
-        this.alert = {
-          show: true,
-          message: "เกิดข้อผิดพลาดในการลงทะเบียน กรุณาลองอีกครั้ง",
-          type: "error",
-        };
-        // console.error("Error submitting form:", error);
-        // alert("เกิดข้อผิดพลาดในการลงทะเบียน กรุณาลองอีกครั้ง");
+        console.error("Error submitting form:", error);
+        alert("เกิดข้อผิดพลาดในการลงทะเบียน กรุณาลองอีกครั้ง");
       }
     },
 
