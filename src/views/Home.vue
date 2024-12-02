@@ -22,6 +22,11 @@
 import Cookies from "js-cookie";
 export default {
   name: "App",
+  data() {
+    return {
+      // courseFree: false,
+    };
+  },
   created() {
     console.log("VITE_CALLBACK_URL HOME", import.meta.env.VITE_CALLBACK_URL);
     const queryParams = this.$route.query;

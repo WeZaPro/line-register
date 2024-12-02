@@ -9,9 +9,7 @@
 
     <div class="form-container">
       <h1 class="form-title">ลงทะเบียน</h1>
-      <!-- <form @submit.prevent="submitForm"> -->
-      <!-- <form @submit.prevent="courseFree ? submitFormFree : submitForm"> -->
-      <form @submit.prevent="handleSubmit">
+      <form @submit.prevent="submitForm">
         <div class="form-group">
           <label for="course" class="highlight-label">
             <strong>คอร์สที่เลือก:</strong> {{ param }}
@@ -69,8 +67,8 @@
           />
         </div>
 
-        <!-- Add file input here (only if courseFree is false) -->
-        <div class="form-group" v-if="!courseFree">
+        <!-- Add file input here -->
+        <div class="form-group">
           <label for="file">อัพโหลดไฟล์:</label>
           <input type="file" id="file" @change="handleFileUpload" />
         </div>
@@ -83,7 +81,6 @@
 
 <script>
 import Cookies from "js-cookie";
-import axios from "axios";
 import AlertComponent from "../components/AlertComponent.vue";
 
 export default {
@@ -93,7 +90,6 @@ export default {
   },
   data() {
     return {
-      courseFree: false,
       loading: false,
       alert: {
         show: false,
@@ -118,18 +114,6 @@ export default {
     this.param = Cookies.get("param") || "ไม่มีข้อมูลคอร์ส";
     this.price = Cookies.get("price") || "ไม่มีข้อมูลคอร์ส";
     console.log("Param from cookies:", this.param);
-
-    // if (this.param && this.param.includes("Free")) {
-    //   this.courseFree = true;
-    // }
-    // console.log("this.courseFree:", this.courseFree);
-
-    // เปลี่ยนเป็นตัวพิมพ์เล็กทั้งหมดก่อนการตรวจสอบ
-    if (this.param && this.param.toLowerCase().includes("free")) {
-      this.courseFree = true;
-    }
-
-    console.log("this.courseFree:", this.courseFree);
 
     // Get 'code' and 'state' from URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -194,20 +178,6 @@ export default {
       }
     },
 
-    // check submit from courseFree true/false
-    handleSubmit() {
-      console.log("Form submission triggered");
-
-      // Check if courseFree is true and call the appropriate method
-      if (this.courseFree) {
-        console.log("Submitting free course form...");
-        this.submitFormFree();
-      } else {
-        console.log("Submitting regular course form...");
-        this.submitForm();
-      }
-    },
-
     async submitForm() {
       console.log("Submitting form...");
       console.log("Data to be sent:", {
@@ -227,6 +197,11 @@ export default {
       const currentDate = new Date(); // วันที่ปัจจุบัน
       currentDate.setHours(0, 0, 0, 0); // ตั้งเวลาเป็น 00:00:00 เพื่อเปรียบเทียบเฉพาะวันที่
       inputDate.setHours(0, 0, 0, 0); // ตั้งเวลาเป็น 00:00:00 เช่นกัน
+
+      // if (inputDate <= currentDate) {
+      //   alert("กรุณาเลือกวันที่มากกว่าวันที่ปัจจุบัน");
+      //   return; // หยุดการทำงานของฟังก์ชัน
+      // }
 
       if (inputDate <= currentDate) {
         alert("กรุณาเลือกวันที่มากกว่าวันที่ปัจจุบัน");
@@ -327,93 +302,6 @@ export default {
         };
         // console.error("Error submitting form:", error);
         // alert("เกิดข้อผิดพลาดในการลงทะเบียน กรุณาลองอีกครั้ง");
-      }
-    },
-
-    async submitFormFree() {
-      // ตรวจสอบวันที่
-      const inputDate = new Date(this.form.date); // แปลงวันที่จาก input
-      const currentDate = new Date(); // วันที่ปัจจุบัน
-      currentDate.setHours(0, 0, 0, 0); // ตั้งเวลาเป็น 00:00:00 เพื่อเปรียบเทียบเฉพาะวันที่
-      inputDate.setHours(0, 0, 0, 0); // ตั้งเวลาเป็น 00:00:00 เช่นกัน
-
-      if (inputDate <= currentDate) {
-        alert("กรุณาเลือกวันที่มากกว่าวันที่ปัจจุบัน");
-        return; // หยุดการทำงานของฟังก์ชัน
-      }
-
-      console.log("Form submitted >>>>:", this.form);
-      console.log("this.form.name >>>>>>>", this.form.name);
-
-      // สร้างข้อมูลที่ต้องการส่งไปยัง API
-      const sendData = {
-        date: this.form.date,
-        name: this.form.name,
-        phone: this.form.phone,
-        email: this.form.email,
-        displayName: this.displayName,
-        param: this.param,
-        lineUserId: this.price,
-      };
-
-      try {
-        const apiEndpoint = import.meta.env.VITE_API + "/submitFreeCourse";
-
-        //เริ่มโหลด
-        this.loading = true;
-
-        // ใช้ axios เพื่อส่งข้อมูล
-        const response = await axios.post(apiEndpoint, sendData, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        console.log("Form submitted successfully:", response.data);
-
-        if (response.status === 200) {
-          // ปิดการโหลด
-          this.loading = false;
-
-          this.alert = {
-            show: true,
-            message: "ลงทะเบียนสำเร็จ!",
-            type: "success",
-          };
-
-          // ส่งข้อมูลไปยัง Google Tag Manager (GTM)
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: "formSubmit_vue",
-            formData: {
-              course: this.param,
-              price: this.price,
-              displayName: this.displayName,
-              date: this.form.date,
-              name: this.form.name,
-              phone: this.form.phone,
-              email: this.form.email,
-            },
-          });
-
-          this.resetForm(); // รีเซ็ตฟอร์ม
-
-          setTimeout(() => {
-            window.open(
-              `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}&phone=${response.data.dataCustomer.phone}&email=${response.data.dataCustomer.email}&course=${response.data.dataCustomer.param}&price=${response.data.dataCustomer.price}`
-            );
-          }, 0);
-
-          window.close(); // ปิดหน้าปัจจุบัน
-        }
-      } catch (error) {
-        this.loading = false; // ปิดการโหลด
-        this.alert = {
-          show: true,
-          message: "เกิดข้อผิดพลาดในการลงทะเบียน กรุณาลองอีกครั้ง",
-          type: "error",
-        };
-        console.error("Error during form submission:", error);
       }
     },
 
