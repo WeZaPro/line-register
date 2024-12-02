@@ -17,6 +17,12 @@
         </div>
 
         <div class="form-group">
+          <label for="price" class="highlight-label">
+            <strong>คอร์ส ราคา:</strong> {{ price }}
+          </label>
+        </div>
+
+        <div class="form-group">
           <label for="displayName" class="highlight-label">
             <strong>line display name:</strong> {{ displayName }}
           </label>
@@ -113,7 +119,7 @@ export default {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
     if (code) {
-      this.getLineUserId(code, this.param);
+      this.getLineUserId(code, this.param, this.price);
     }
   },
   methods: {
@@ -123,7 +129,7 @@ export default {
       console.log("Selected file:", this.file);
     },
 
-    async getLineUserId(code, param) {
+    async getLineUserId(code, param, price) {
       try {
         const redirectUri = import.meta.env.VITE_CALLBACK_URL + "/callback";
         const clientId = import.meta.env.VITE_CLIENT_ID;

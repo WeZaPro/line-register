@@ -27,6 +27,9 @@ export default {
     const queryParams = this.$route.query;
     const param = queryParams.param;
     Cookies.set("param", param, { expires: 7 });
+
+    const price = queryParams.price;
+    Cookies.set("price", price, { expires: 7 });
   },
   methods: {
     loginWithLine() {
