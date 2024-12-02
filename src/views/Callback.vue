@@ -90,6 +90,7 @@ export default {
         message: "",
         type: "success", // หรือ "error", "warning"
       },
+      price: "", //peice couse
       param: "", // Param to hold course data
       displayName: "", // Line display name
       lineUserId: "", // Line lineUserId
@@ -105,6 +106,7 @@ export default {
   created() {
     // Get param from cookies
     this.param = Cookies.get("param") || "ไม่มีข้อมูลคอร์ส";
+    this.price = Cookies.get("price") || "ไม่มีข้อมูลคอร์ส";
     console.log("Param from cookies:", this.param);
 
     // Get 'code' and 'state' from URL
@@ -180,6 +182,7 @@ export default {
         displayName: this.displayName,
         lineUserId: this.lineUserId,
         param: this.param,
+        price: this.price,
         file: this.file, // Add the file to the data being sent
       });
 
@@ -227,6 +230,7 @@ export default {
         formData.append("displayName", this.displayName);
         formData.append("lineUserId", this.lineUserId);
         formData.append("param", this.param);
+        formData.append("price", this.price);
         if (this.file) {
           formData.append("file", this.file); // Append the file to FormData
         }
@@ -269,10 +273,11 @@ export default {
             // window.location.href = "https://vbacvetthailand.com/thankyoupage";
             window.open(
               // `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}`
-              `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}&phone=${result.dataCustomer.phone}&email=${result.dataCustomer.email}&course=${result.dataCustomer.param}`
+              `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}&phone=${result.dataCustomer.phone}&email=${result.dataCustomer.email}&course=${result.dataCustomer.param}&price=${result.dataCustomer.price}`
             );
           }, 0);
-          console.log("result ", result.dataCustomer.phone);
+          console.log("result phone", result.dataCustomer.phone);
+          console.log("result price", result.dataCustomer.price);
 
           window.close(); // Close the current page
 
