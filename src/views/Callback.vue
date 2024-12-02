@@ -351,9 +351,10 @@ export default {
         name: this.form.name,
         phone: this.form.phone,
         email: this.form.email,
+        lineUserId: this.lineUserId,
         displayName: this.displayName,
         param: this.param,
-        lineUserId: this.price,
+        price: this.price,
       };
 
       try {
