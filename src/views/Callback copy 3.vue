@@ -263,21 +263,17 @@ export default {
             type: "success",
           };
 
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event: "formSubmit_vue",
-            formData: {
-              course: this.param,
-              price: this.price,
-              displayName: this.displayName,
-              date: this.form.date,
-              name: this.form.name,
-              phone: this.form.phone,
-              email: this.form.email,
-            },
-          });
+          // console.log("this.loading response ok ", this.loading);
+          // alert("ลงทะเบียนสำเร็จ!"); // แจ้งเตือนสำเร็จ
 
           this.resetForm(); // รีเซ็ตฟอร์ม
+          // เปิดหน้าเว็บใหม่และปิดหน้าเว็บปัจจุบัน
+          // window.open(
+          //   `https://vbacvetthailand.com/thankyoupage/?phone=${this.form.phone}&course=${this.param}`,
+          //   "_self"
+          // ); // Open thank you page in the same tab
+          // window.open("https://vbacvetthailand.com/thankyoupage");
+          // window.location.href = "https://vbacvetthailand.com/thankyoupage";
 
           setTimeout(() => {
             // window.location.href = "https://vbacvetthailand.com/thankyoupage";
