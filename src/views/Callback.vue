@@ -287,7 +287,7 @@ export default {
             message: "ลงทะเบียนสำเร็จ!",
             type: "success",
           };
-          // send to gtm
+          // send to gtm **************************************************
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
             event: "formSubmit_vue",
@@ -299,6 +299,8 @@ export default {
               name: this.form.name,
               phone: this.form.phone,
               email: this.form.email,
+              //test  send line id to GTM
+              lineUserId: this.lineUserId,
             },
           });
 
