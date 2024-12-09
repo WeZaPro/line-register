@@ -396,6 +396,7 @@ export default {
               name: this.form.name,
               phone: this.form.phone,
               email: this.form.email,
+              lineUserId: this.lineUserId,
             },
           });
 
