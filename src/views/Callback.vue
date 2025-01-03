@@ -310,7 +310,7 @@ export default {
             },
           });
 
-          this.resetForm(); // รีเซ็ตฟอร์ม
+          // this.resetForm(); // รีเซ็ตฟอร์ม
 
           setTimeout(() => {
             // window.location.href = "https://vbacvetthailand.com/thankyoupage";
@@ -406,7 +406,7 @@ export default {
             },
           });
 
-          this.resetForm(); // รีเซ็ตฟอร์ม
+          // this.resetForm(); // รีเซ็ตฟอร์ม
           //
           setTimeout(() => {
             window.open(
