@@ -379,7 +379,7 @@ export default {
         });
 
         console.log("response.data:", response.data);
-        console.log("response:", response);
+
         // const result_nofile = await response.json();
 
         if (response.status === 200) {
