@@ -407,11 +407,21 @@ export default {
           });
 
           this.resetForm(); // รีเซ็ตฟอร์ม
-
+          //
           setTimeout(() => {
             window.open(
-              `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}&phone=${response.data.dataCustomer.phone}&email=${response.data.dataCustomer.email}&course=${response.data.dataCustomer.course}&price=${response.data.dataCustomer.price}`
+              // `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}`
+              `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}&phone=${result.dataCustomer.phone}&email=${result.dataCustomer.email}&course=${result.dataCustomer.course}&price=${result.dataCustomer.price}`
             );
+            // window.open(
+            //   `${import.meta.env.VITE_THANKYOU_PAGE}/?lineID=${
+            //     this.lineUserId
+            //   }&phone=${response.data.dataCustomer.phone}&email=${
+            //     response.data.dataCustomer.email
+            //   }&course=${response.data.dataCustomer.course}&price=${
+            //     response.data.dataCustomer.price
+            //   }`
+            // );
           }, 0);
 
           window.close(); // ปิดหน้าปัจจุบัน
