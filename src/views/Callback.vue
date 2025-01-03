@@ -407,7 +407,8 @@ export default {
           });
           setTimeout(() => {
             window.open(
-              `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}&phone=${response.data.dataCustomer.phone}&email=${response.data.dataCustomer.email}&course=${response.data.dataCustomer.course}&price=${response.data.dataCustomer.price}`
+              `https://vbacvetthailand.com/thankyoupage/`
+              // `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}&phone=${response.data.dataCustomer.phone}&email=${response.data.dataCustomer.email}&course=${response.data.dataCustomer.course}&price=${response.data.dataCustomer.price}`
             );
           }, 0);
 
