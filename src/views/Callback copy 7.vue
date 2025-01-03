@@ -141,7 +141,7 @@ export default {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
     if (code) {
-      this.getLineUserId(code, this.course, this.price);
+      this.getLineUserId(code, this.param, this.price);
     }
   },
   methods: {
@@ -151,7 +151,7 @@ export default {
       console.log("Selected file:", this.file);
     },
 
-    async getLineUserId(code, course, price) {
+    async getLineUserId(code, param, price) {
       try {
         const redirectUri = import.meta.env.VITE_CALLBACK_URL + "/callback";
         const clientId = import.meta.env.VITE_CLIENT_ID;
@@ -223,7 +223,7 @@ export default {
         email: this.form.email,
         displayName: this.displayName,
         lineUserId: this.lineUserId,
-        course: this.course,
+        param: this.param,
         price: this.price,
         file: this.file, // Add the file to the data being sent
       });
@@ -266,7 +266,7 @@ export default {
         formData.append("email", this.form.email);
         formData.append("displayName", this.displayName);
         formData.append("lineUserId", this.lineUserId);
-        formData.append("course", this.course);
+        formData.append("param", this.param);
         formData.append("price", this.price);
         if (this.file) {
           formData.append("file", this.file); // Append the file to FormData
@@ -298,7 +298,7 @@ export default {
           window.dataLayer.push({
             event: "formSubmit_vue",
             formData: {
-              course: this.course,
+              course: this.param,
               price: this.price,
               displayName: this.displayName,
               date: this.form.date,
@@ -316,7 +316,7 @@ export default {
             // window.location.href = "https://vbacvetthailand.com/thankyoupage";
             window.open(
               // `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}`
-              `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}&phone=${result.dataCustomer.phone}&email=${result.dataCustomer.email}&course=${result.dataCustomer.course}&price=${result.dataCustomer.price}`
+              `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}&phone=${result.dataCustomer.phone}&email=${result.dataCustomer.email}&course=${result.dataCustomer.param}&price=${result.dataCustomer.price}`
             );
           }, 0);
           console.log("result phone", result.dataCustomer.phone);
@@ -361,7 +361,7 @@ export default {
         email: this.form.email,
         lineUserId: this.lineUserId,
         displayName: this.displayName,
-        course: this.course,
+        param: this.param,
         price: this.price,
       };
 
@@ -395,7 +395,7 @@ export default {
           window.dataLayer.push({
             event: "formSubmit_vue",
             formData: {
-              course: this.course,
+              course: this.param,
               price: this.price,
               displayName: this.displayName,
               date: this.form.date,
@@ -410,7 +410,7 @@ export default {
 
           setTimeout(() => {
             window.open(
-              `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}&phone=${response.data.dataCustomer.phone}&email=${response.data.dataCustomer.email}&course=${response.data.dataCustomer.course}&price=${response.data.dataCustomer.price}`
+              `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}&phone=${response.data.dataCustomer.phone}&email=${response.data.dataCustomer.email}&course=${response.data.dataCustomer.param}&price=${response.data.dataCustomer.price}`
             );
           }, 0);
 
@@ -435,7 +435,7 @@ export default {
       this.form.email = "";
       this.displayName = "";
       // this.lineUserId = "";
-      this.course = "";
+      this.param = "";
       this.file = null; // Reset the file field
 
       // Reset input file
