@@ -30,6 +30,7 @@ export default {
   },
   created() {
     const param = ref("");
+    const course = ref("");
     const price = ref("");
     const queryParams = this.$route.query;
     console.log("queryParams", queryParams);
@@ -41,12 +42,14 @@ export default {
       // ใช้ URLSearchParams แปลง liff.state และดึงค่า param กับ price
       const queryParamsState = new URLSearchParams(liffState);
       param.value = queryParamsState.get("param") || "";
+      course.value = queryParamsState.get("course") || "";
       price.value = queryParamsState.get("price") || "";
       console.log("param.value", param.value);
+      console.log("course.value", course.value);
       console.log("price.value", price.value);
 
       Cookies.set("param", param.value, { expires: 30 });
-
+      Cookies.set("course", course.value, { expires: 30 });
       Cookies.set("price", price.value, { expires: 30 });
     }
 

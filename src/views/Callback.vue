@@ -14,7 +14,7 @@
       <form @submit.prevent="handleSubmit">
         <div class="form-group">
           <label for="course" class="highlight-label">
-            <strong>คอร์สที่เลือก:</strong> {{ param }}
+            <strong>คอร์สที่เลือก:</strong> {{ course }}
           </label>
         </div>
 
@@ -102,6 +102,7 @@ export default {
       },
       price: "", //peice couse
       param: "", // Param to hold course data
+      course: "",
       displayName: "", // Line display name
       lineUserId: "", // Line lineUserId
       form: {
@@ -116,6 +117,7 @@ export default {
   created() {
     // Get param from cookies
     this.param = Cookies.get("param") || "ไม่มีข้อมูลคอร์ส";
+    this.course = Cookies.get("course") || "ไม่มีข้อมูลคอร์ส";
     this.price = Cookies.get("price") || "ไม่มีข้อมูลคอร์ส";
     console.log("Param from cookies:", this.param);
 
@@ -125,7 +127,11 @@ export default {
     // console.log("this.courseFree:", this.courseFree);
 
     // เปลี่ยนเป็นตัวพิมพ์เล็กทั้งหมดก่อนการตรวจสอบ
-    if (this.param && this.param.toLowerCase().includes("free")) {
+    // if (this.param && this.param.toLowerCase().includes("free")) {
+    //   this.courseFree = true;
+    // }
+
+    if (this.course && this.course.toLowerCase().includes("free")) {
       this.courseFree = true;
     }
 
