@@ -322,7 +322,7 @@ export default {
           console.log("result phone", result.dataCustomer.phone);
           console.log("result price", result.dataCustomer.price);
 
-          window.close(); // Close the current page
+          // window.close(); // Close the current page
 
           // open thankyou page
           //https://vbacvetthailand.com/thankyoupage/
@@ -424,7 +424,7 @@ export default {
             // );
           }, 0);
 
-          window.close(); // ปิดหน้าปัจจุบัน
+          // window.close(); // ปิดหน้าปัจจุบัน
         }
       } catch (error) {
         this.loading = false; // ปิดการโหลด
