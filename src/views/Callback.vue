@@ -322,7 +322,7 @@ export default {
           console.log("result phone", result.dataCustomer.phone);
           console.log("result price", result.dataCustomer.price);
 
-          // window.close(); // Close the current page
+          window.close(); // Close the current page
 
           // open thankyou page
           //https://vbacvetthailand.com/thankyoupage/
@@ -407,8 +407,9 @@ export default {
           });
           setTimeout(() => {
             window.open(
-              `https://vbacvetthailand.com/thankyoupage/`
-              // `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}&phone=${response.data.dataCustomer.phone}&email=${response.data.dataCustomer.email}&course=${response.data.dataCustomer.course}&price=${response.data.dataCustomer.price}`
+              // `https://vbacvetthailand.com/thankyoupage/`
+              `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}`
+              //  `https://vbacvetthailand.com/thankyoupage/?lineID=${this.lineUserId}&phone=${response.data.dataCustomer.phone}&email=${response.data.dataCustomer.email}&course=${response.data.dataCustomer.course}&price=${response.data.dataCustomer.price}`
             );
           }, 0);
 
@@ -430,7 +431,7 @@ export default {
           // );
           // }, 0);
 
-          // window.close(); // ปิดหน้าปัจจุบัน
+          window.close(); // ปิดหน้าปัจจุบัน
         }
       } catch (error) {
         this.loading = false; // ปิดการโหลด
