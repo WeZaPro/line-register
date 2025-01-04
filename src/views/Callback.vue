@@ -256,7 +256,7 @@ export default {
       //   return; // หยุดการทำงานของฟังก์ชัน
       // }
       // ย่อขนาดรูปภาพก่อนส่ง
-      this.resizedFile = await resizeImage(this.file);
+      this.resizedFile = await this.resizeImage(this.file);
 
       try {
         const apiEndpoint = import.meta.env.VITE_API + "/submit"; // Replace with your API URL
