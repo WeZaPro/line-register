@@ -93,6 +93,7 @@ export default {
   },
   data() {
     return {
+      resizedFile: "",
       courseFree: false,
       loading: false,
       alert: {
@@ -255,7 +256,7 @@ export default {
       //   return; // หยุดการทำงานของฟังก์ชัน
       // }
       // ย่อขนาดรูปภาพก่อนส่ง
-      const resizedFile = await resizeImage(this.file);
+      this.resizedFile = await resizeImage(this.file);
 
       try {
         const apiEndpoint = import.meta.env.VITE_API + "/submit"; // Replace with your API URL
@@ -273,8 +274,8 @@ export default {
         // if (this.file) {
         //   formData.append("file", this.file); // Append the file to FormData
         // }
-        if (resizedFile) {
-          formData.append("file", resizedFile); // ใช้ไฟล์ที่ย่อขนาดแล้ว
+        if (this.resizedFile) {
+          formData.append("file", this.resizedFile); // ใช้ไฟล์ที่ย่อขนาดแล้ว
         }
         //Loading start
         this.loading = true;
