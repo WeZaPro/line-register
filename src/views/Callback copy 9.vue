@@ -254,8 +254,6 @@ export default {
       //   alert("กรุณากรอกข้อมูลให้ครบ");
       //   return; // หยุดการทำงานของฟังก์ชัน
       // }
-      // ย่อขนาดรูปภาพก่อนส่ง
-      const resizedFile = await resizeImage(this.file);
 
       try {
         const apiEndpoint = import.meta.env.VITE_API + "/submit"; // Replace with your API URL
@@ -270,11 +268,8 @@ export default {
         formData.append("lineUserId", this.lineUserId);
         formData.append("course", this.course);
         formData.append("price", this.price);
-        // if (this.file) {
-        //   formData.append("file", this.file); // Append the file to FormData
-        // }
-        if (resizedFile) {
-          formData.append("file", resizedFile); // ใช้ไฟล์ที่ย่อขนาดแล้ว
+        if (this.file) {
+          formData.append("file", this.file); // Append the file to FormData
         }
         //Loading start
         this.loading = true;
@@ -471,41 +466,6 @@ export default {
       if (fileInput) {
         fileInput.value = null;
       }
-    },
-
-    async resizeImage(file) {
-      return new Promise((resolve, reject) => {
-        const img = new Image();
-        const reader = new FileReader();
-        reader.onload = () => {
-          img.src = reader.result;
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-
-        img.onload = () => {
-          const canvas = document.createElement("canvas");
-          const ctx = canvas.getContext("2d");
-
-          // ตั้งค่าขนาดใหม่ที่ต้องการ (ตัวอย่าง: กว้าง 500px)
-          const maxWidth = 500;
-          const scaleFactor = maxWidth / img.width;
-          canvas.width = maxWidth;
-          canvas.height = img.height * scaleFactor;
-
-          // วาดภาพลงใน canvas ที่ย่อขนาดแล้ว
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-          // แปลง canvas เป็นไฟล์รูปภาพใหม่
-          canvas.toBlob((blob) => {
-            const resizedFile = new File([blob], file.name, {
-              type: file.type,
-              lastModified: file.lastModified,
-            });
-            resolve(resizedFile);
-          }, file.type);
-        };
-      });
     },
   },
 };
