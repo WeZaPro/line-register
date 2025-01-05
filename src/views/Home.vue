@@ -9,7 +9,7 @@
       <h1 class="card-title">ขั้นตอนการลงทะเบียน</h1>
       <img
         class="card-image"
-        src="https://vbacvetthailand.com/wp-content/uploads/2024/11/6751922.jpg"
+        src="https://vbacvetthailand.com/wp-content/uploads/2025/01/Banner_teams_mobile.jpg"
         alt="LINE Login"
       />
       <!-- <h1 class="card-title">ขั้นตอนการลงทะเบียน</h1> -->
