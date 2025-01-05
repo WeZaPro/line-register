@@ -6,14 +6,17 @@
         src="https://via.placeholder.com/400x200"
         alt="LINE Login"
       /> -->
-      <h1 class="card-title">ขั้นตอนการลงทะเบียน</h1>
-      <img
-        class="card-image"
-        src="https://vbacvetthailand.com/wp-content/uploads/2025/01/Banner_teams_mobile.jpg"
-        alt="LINE Login"
-      />
-      <!-- <h1 class="card-title">ขั้นตอนการลงทะเบียน</h1> -->
+      <h1 class="card-title">การลงทะเบียน</h1>
       <button class="login-button" @click="loginWithLine">ลงทะเบียน</button>
+      <!-- <h1 class="card-title">ขั้นตอนการลงทะเบียน</h1> -->
+      <!-- <button class="login-button" @click="loginWithLine">ลงทะเบียน</button> -->
+      <div class="">
+        <img
+          class="card-image"
+          src="https://vbacvetthailand.com/wp-content/uploads/2025/01/Banner_teams_mobile.jpg"
+          alt="LINE Login"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -113,7 +116,8 @@ export default {
 }
 
 .card-image {
-  width: 100%;
+  padding: 0px;
+  width: 60%;
   border-radius: 8px 8px 0 0;
 }
 
@@ -140,5 +144,16 @@ export default {
 
 .login-button:active {
   background-color: #008a00; /* สีเข้มขึ้นเมื่อกด */
+}
+
+.image-container {
+  width: 50%;
+  height: 200px; /* ตั้งค่าความสูงที่เหมาะสม */
+  margin: 20px auto;
+  background: url("https://vbacvetthailand.com/wp-content/uploads/2025/01/Banner_teams_mobile.jpg")
+    no-repeat center center;
+  background-size: cover;
+  border: 1px solid #ddd; /* เพิ่มเส้นขอบถ้าต้องการ */
+  border-radius: 10px; /* เพิ่มมุมโค้ง */
 }
 </style>
